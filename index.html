@@ -16,7 +16,7 @@
 
   <main>
 
-    <!-- CRONÔMETRO -->
+    <!-- CRONÔMETRO + ANOTAÇÕES -->
     <section id="cronometro">
       <p id="materia-atual">Escolha uma matéria</p>
       <p id="tempo">00:00:00</p>
@@ -25,6 +25,7 @@
         <button id="btn-pausar">Pausar</button>
         <button id="btn-parar">Parar</button>
       </div>
+      <textarea id="input-anotacao"></textarea>
     </section>
 
     <!-- LISTA DE MATÉRIAS -->
@@ -63,21 +64,19 @@
     </div>
   </dialog>
 
-    <!-- JANELA: ANOTAÇÃO AO PARAR -->
+  <!-- JANELA: CONFIRMAR TEMPO AO PARAR -->
   <dialog id="dialog-anotacao">
     <h3>Sessão finalizada</h3>
     <p id="resumo-sessao"></p>
-
-    <label>Tempo estudado (corrija se precisar):</label>
-    <div class="campo-tempo">
-      <input type="number" id="input-horas" min="0"> h
-      <input type="number" id="input-minutos" min="0" max="59"> min
-    </div>
-
-    <textarea id="input-anotacao" placeholder="O que você estudou? Dúvidas? Onde parou?"></textarea>
-
+    <p id="tempo-final"></p>
+    <button id="btn-corrigir" class="link">Corrigir tempo</button>
+    <input type="text" id="input-tempo" inputmode="numeric" placeholder="Ex: 1:30 ou 90" hidden>
     <div class="botoes">
       <button id="btn-descartar-sessao">Descartar</button>
-      <button id="btn-salvar-sessao">Salvar sessão</button>
+      <button id="btn-salvar-sessao">Salvar</button>
     </div>
   </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>

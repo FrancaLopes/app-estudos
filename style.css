@@ -55,6 +55,8 @@ button:disabled {
   cursor: not-allowed;
 }
 
+[hidden] { display: none !important; }
+
 /* ===== SEÇÕES (cartões brancos) ===== */
 section {
   background: var(--cartao);
@@ -88,6 +90,15 @@ section {
 #btn-start  { background: var(--verde); }
 #btn-pausar { background: var(--amarelo); }
 #btn-parar  { background: var(--vermelho); }
+
+/* ===== ANOTAÇÕES ===== */
+#cronometro textarea {
+  height: 220px;
+  margin: 16px 0 0;
+  text-align: left;
+}
+
+#cronometro textarea:disabled { background: var(--fundo); }
 
 /* ===== LISTA DE MATÉRIAS ===== */
 #lista-materias { list-style: none; }
@@ -188,7 +199,7 @@ section {
 dialog {
   border: none;
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   width: 90%;
   max-width: 400px;
   margin: auto;
@@ -198,6 +209,35 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
 
 dialog h3 { margin-bottom: 12px; }
 
+dialog .botoes {
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+#resumo-sessao { color: var(--texto-suave); }
+
+#tempo-final {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.link {
+  background: none;
+  color: var(--principal);
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  text-decoration: underline;
+}
+
+#btn-descartar-sessao {
+  background: var(--fundo);
+  color: var(--vermelho);
+}
+
+/* ===== CAMPOS ===== */
 input[type="text"],
 textarea {
   width: 100%;
