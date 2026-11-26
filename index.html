@@ -63,14 +63,21 @@
     </div>
   </dialog>
 
-  <!-- JANELA: ANOTAÇÃO AO PARAR -->
+    <!-- JANELA: ANOTAÇÃO AO PARAR -->
   <dialog id="dialog-anotacao">
     <h3>Sessão finalizada</h3>
     <p id="resumo-sessao"></p>
-    <textarea id="input-anotacao" placeholder="O que você estudou? Dúvidas? Onde parou?"></textarea>
-    <button id="btn-salvar-sessao">Salvar sessão</button>
-  </dialog>
 
-  <script src="script.js"></script>
-</body>
-</html>
+    <label>Tempo estudado (corrija se precisar):</label>
+    <div class="campo-tempo">
+      <input type="number" id="input-horas" min="0"> h
+      <input type="number" id="input-minutos" min="0" max="59"> min
+    </div>
+
+    <textarea id="input-anotacao" placeholder="O que você estudou? Dúvidas? Onde parou?"></textarea>
+
+    <div class="botoes">
+      <button id="btn-descartar-sessao">Descartar</button>
+      <button id="btn-salvar-sessao">Salvar sessão</button>
+    </div>
+  </dialog>
