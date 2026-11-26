@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App de Estudos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <header>
+    <h1>Meus Estudos</h1>
+    <button id="btn-nova-materia">+ Matéria</button>
+  </header>
+
+  <main>
+
+    <!-- CRONÔMETRO -->
+    <section id="cronometro">
+      <p id="materia-atual">Escolha uma matéria</p>
+      <p id="tempo">00:00:00</p>
+      <div class="botoes">
+        <button id="btn-start">Start</button>
+        <button id="btn-pausar">Pausar</button>
+        <button id="btn-parar">Parar</button>
+      </div>
+    </section>
+
+    <!-- LISTA DE MATÉRIAS -->
+    <section>
+      <h2>Matérias</h2>
+      <ul id="lista-materias"></ul>
+    </section>
+
+    <!-- RESUMO DE HORAS -->
+    <section>
+      <h2>Resumo</h2>
+      <div class="abas">
+        <button class="aba ativa" data-periodo="hoje">Hoje</button>
+        <button class="aba" data-periodo="semana">Semana</button>
+        <button class="aba" data-periodo="mes">Mês</button>
+      </div>
+      <div id="resumo"></div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section>
+      <h2>Histórico</h2>
+      <ul id="historico"></ul>
+    </section>
+
+  </main>
+
+  <!-- JANELA: NOVA MATÉRIA -->
+  <dialog id="dialog-materia">
+    <h3>Nova matéria</h3>
+    <input type="text" id="input-nome-materia" placeholder="Ex: Matemática">
+    <input type="color" id="input-cor-materia" value="#2563eb">
+    <div class="botoes">
+      <button id="btn-cancelar-materia">Cancelar</button>
+      <button id="btn-salvar-materia">Salvar</button>
+    </div>
+  </dialog>
+
+  <!-- JANELA: ANOTAÇÃO AO PARAR -->
+  <dialog id="dialog-anotacao">
+    <h3>Sessão finalizada</h3>
+    <p id="resumo-sessao"></p>
+    <textarea id="input-anotacao" placeholder="O que você estudou? Dúvidas? Onde parou?"></textarea>
+    <button id="btn-salvar-sessao">Salvar sessão</button>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
