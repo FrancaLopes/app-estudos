@@ -1,0 +1,146 @@
+/* ===== VARIÁVEIS (cores do app) ===== */
+:root {
+  --fundo: #f1f5f9;
+  --cartao: #ffffff;
+  --texto: #0f172a;
+  --texto-suave: #64748b;
+  --principal: #2563eb;
+  --verde: #16a34a;
+  --amarelo: #d97706;
+  --vermelho: #dc2626;
+  --borda: #e2e8f0;
+}
+
+/* ===== BASE ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ===== CABEÇALHO ===== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+h1 { font-size: 24px; }
+h2 { font-size: 18px; margin-bottom: 12px; }
+
+/* ===== BOTÕES ===== */
+button {
+  font-size: 16px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--principal);
+  color: white;
+  font-weight: 600;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===== SEÇÕES (cartões brancos) ===== */
+section {
+  background: var(--cartao);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== CRONÔMETRO ===== */
+#cronometro { text-align: center; }
+
+#materia-atual {
+  font-size: 18px;
+  color: var(--texto-suave);
+}
+
+#tempo {
+  font-size: 56px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums; /* números não "pulam" */
+  margin: 8px 0 16px;
+}
+
+.botoes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+#btn-start  { background: var(--verde); }
+#btn-pausar { background: var(--amarelo); }
+#btn-parar  { background: var(--vermelho); }
+
+/* ===== LISTA DE MATÉRIAS ===== */
+#lista-materias { list-style: none; }
+
+.materia {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 2px solid var(--borda);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.materia.selecionada { border-color: var(--principal); }
+
+.bolinha {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.materia .nome { flex: 1; }
+
+.btn-excluir {
+  background: none;
+  color: var(--texto-suave);
+  padding: 4px 8px;
+}
+
+/* ===== ABAS DO RESUMO ===== */
+.abas {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.aba {
+  background: var(--fundo);
+  color: var(--texto);
+  flex: 1;
+}
+
+.aba.ativa {
+  background: var(--principal);
+  color: white;
+}
+
+/* ===== BARRAS DO RESUMO ===== */
+.linha-resumo { margin-bottom: 10px; }
+
+.linha-resumo .info {
+  display: flex;
+  justify-content:
