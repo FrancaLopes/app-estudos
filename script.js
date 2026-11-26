@@ -74,4 +74,72 @@ function mostrarMaterias() {
     });
 
     item.append(bolinha, nome, btnExcluir);
-    listaMaterias.appendChild(item
+    listaMaterias.appendChild(item);
+  });
+}
+
+// Escolhe a matéria que vai ser estudada
+function selecionarMateria(id) {
+  materiaSelecionada = id;
+  const materia = materias.find(m => m.id === id);
+  textoMateria.textContent = materia.nome;
+  mostrarMaterias();
+}
+
+// Cria uma nova matéria
+function salvarMateria() {
+  const nome = inputNome.value.trim();
+  if (nome === "") {
+    alert("Digite o nome da matéria.");
+    return;
+  }
+
+  materias.push({
+    id: Date.now().toString(), // número único baseado no horário
+    nome: nome,
+    cor: inputCor.value
+  });
+
+  salvar("materias", materias);
+  dialogMateria.close();
+  mostrarMaterias();
+}
+
+// Exclui uma matéria
+function excluirMateria(id) {
+  if (!confirm("Excluir esta matéria?")) return;
+
+  materias = materias.filter(m => m.id !== id);
+  salvar("materias", materias);
+
+  if (materiaSelecionada === id) {
+    materiaSelecionada = null;
+    textoMateria.textContent = "Escolha uma matéria";
+  }
+  mostrarMaterias();
+}
+
+// =====================================================
+// BOTÕES
+// =====================================================
+document.getElementById("btn-nova-materia").addEventListener("click", function () {
+  inputNome.value = "";
+  dialogMateria.showModal();
+  inputNome.focus();
+});
+
+document.getElementById("btn-cancelar-materia").addEventListener("click", function () {
+  dialogMateria.close();
+});
+
+document.getElementById("btn-salvar-materia").addEventListener("click", salvarMateria);
+
+// Enter no campo de nome também salva
+inputNome.addEventListener("keydown", function (evento) {
+  if (evento.key === "Enter") salvarMateria();
+});
+
+// =====================================================
+// INICIAR
+// =====================================================
+mostrarMaterias();

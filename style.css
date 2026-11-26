@@ -143,4 +143,77 @@ section {
 
 .linha-resumo .info {
   display: flex;
-  justify-content:
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.barra-fundo {
+  background: var(--fundo);
+  border-radius: 6px;
+  height: 10px;
+}
+
+.barra {
+  height: 10px;
+  border-radius: 6px;
+}
+
+/* ===== HISTÓRICO ===== */
+#historico { list-style: none; }
+
+.sessao {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.sessao .topo {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.sessao .data {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.sessao .nota {
+  margin-top: 4px;
+  white-space: pre-wrap; /* mantém as quebras de linha da anotação */
+}
+
+.vazio { color: var(--texto-suave); }
+
+/* ===== JANELAS (dialog) ===== */
+dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+}
+
+dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+
+dialog h3 { margin-bottom: 12px; }
+
+input[type="text"],
+textarea {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px;
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-family: inherit;
+}
+
+textarea { height: 120px; resize: vertical; }
+
+input[type="color"] {
+  width: 100%;
+  height: 44px;
+  margin-bottom: 12px;
+  border: none;
+}
