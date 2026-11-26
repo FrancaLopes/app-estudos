@@ -80,10 +80,16 @@ function mostrarMaterias() {
 
 // Escolhe a matéria que vai ser estudada
 function selecionarMateria(id) {
+  // Não deixa trocar de matéria com uma sessão em andamento
+  if (cronometro.materiaId !== null) {
+    alert("Pare a sessão atual antes de trocar de matéria.");
+    return;
+  }
   materiaSelecionada = id;
   const materia = materias.find(m => m.id === id);
   textoMateria.textContent = materia.nome;
   mostrarMaterias();
+  atualizarTela();
 }
 
 // Cria uma nova matéria
@@ -143,3 +149,102 @@ inputNome.addEventListener("keydown", function (evento) {
 // INICIAR
 // =====================================================
 mostrarMaterias();
+// =====================================================
+// CRONÔMETRO
+// =====================================================
+const textoTempo = document.getElementById("tempo");
+const btnStart   = document.getElementById("btn-start");
+const btnPausar  = document.getElementById("btn-pausar");
+const btnParar   = document.getElementById("btn-parar");
+
+// Estado do cronômetro (salvo para não perder se a página recarregar)
+// materiaId: matéria da sessão | inicio: quando apertou Start | acumulado: tempo antes de pausar
+let cronometro = carregar("cronometro", { materiaId: null, inicio: null, acumulado: 0 });
+let intervalo = null;
+
+// Calcula quanto tempo já passou (em milissegundos)
+function tempoDecorrido() {
+  let total = cronometro.acumulado;
+  if (cronometro.inicio !== null) {
+    total += Date.now() - cronometro.inicio;
+  }
+  return total;
+}
+
+// Transforma milissegundos em "00:00:00"
+function formatarTempo(ms) {
+  const totalSegundos = Math.floor(ms / 1000);
+  const horas    = Math.floor(totalSegundos / 3600);
+  const minutos  = Math.floor((totalSegundos % 3600) / 60);
+  const segundos = totalSegundos % 60;
+  return [horas, minutos, segundos]
+    .map(n => String(n).padStart(2, "0"))
+    .join(":");
+}
+
+// Atualiza o relógio e liga/desliga os botões
+function atualizarTela() {
+  textoTempo.textContent = formatarTempo(tempoDecorrido());
+
+  const rodando  = cronometro.inicio !== null;
+  const emSessao = cronometro.materiaId !== null;
+
+  btnStart.disabled  = rodando || (!emSessao && materiaSelecionada === null);
+  btnPausar.disabled = !rodando;
+  btnParar.disabled  = !emSessao;
+  btnStart.textContent = (emSessao && !rodando) ? "Continuar" : "Start";
+}
+
+function iniciar() {
+  // Começando uma sessão nova
+  if (cronometro.materiaId === null) {
+    cronometro.materiaId = materiaSelecionada;
+    cronometro.acumulado = 0;
+  }
+  cronometro.inicio = Date.now();
+  salvar("cronometro", cronometro);
+
+  clearInterval(intervalo);
+  intervalo = setInterval(atualizarTela, 1000); // atualiza a cada 1 segundo
+  atualizarTela();
+}
+
+function pausar() {
+  cronometro.acumulado = tempoDecorrido();
+  cronometro.inicio = null;
+  salvar("cronometro", cronometro);
+  clearInterval(intervalo);
+  atualizarTela();
+}
+
+function parar() {
+  if (cronometro.inicio !== null) pausar();
+  const duracao = cronometro.acumulado;
+
+  // Provisório: no passo 6 isso vira a janela de anotação
+  alert("Sessão encerrada: " + formatarTempo(duracao));
+  zerarCronometro();
+}
+
+function zerarCronometro() {
+  cronometro = { materiaId: null, inicio: null, acumulado: 0 };
+  salvar("cronometro", cronometro);
+  clearInterval(intervalo);
+  atualizarTela();
+}
+
+btnStart.addEventListener("click", iniciar);
+btnPausar.addEventListener("click", pausar);
+btnParar.addEventListener("click", parar);
+
+// Se a página recarregou no meio de uma sessão, retoma de onde estava
+if (cronometro.materiaId !== null) {
+  materiaSelecionada = cronometro.materiaId;
+  const materia = materias.find(m => m.id === materiaSelecionada);
+  if (materia) textoMateria.textContent = materia.nome;
+  mostrarMaterias();
+  if (cronometro.inicio !== null) {
+    intervalo = setInterval(atualizarTela, 1000);
+  }
+}
+atualizarTela();
